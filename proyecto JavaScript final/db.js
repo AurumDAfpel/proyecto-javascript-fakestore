@@ -57,3 +57,24 @@ function removeFromCart(id) {
   saveCart();
   renderCart();
 }
+
+function renderCart() {
+  cartContainer.innerHTML = '';
+  let total = 0;
+
+  Object.values(cart).forEach(item => {
+    total += item.price * item.quantity;
+
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+
+    div.innerHTML = `
+      <span>${item.title} x${item.quantity}</span>
+      <button onclick="removeFromCart(${item.id})">X</button>
+    `;
+
+    cartContainer.appendChild(div);
+  });
+
+  cartTotal.textContent = total.toFixed(2);
+}
