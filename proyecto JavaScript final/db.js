@@ -40,3 +40,14 @@ function renderProducts(list) {
     productsContainer.appendChild(card);
   });
 }
+
+function addToCart(id) {
+  const product = products.find(p => p.id === id);
+  if (cart[id]) {
+    cart[id].quantity++;
+  } else {
+    cart[id] = { ...product, quantity: 1 };
+  }
+  saveCart();
+  renderCart();
+}
