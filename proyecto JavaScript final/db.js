@@ -51,3 +51,9 @@ function addToCart(id) {
   saveCart();
   renderCart();
 }
+
+function removeFromCart(id) {
+  delete cart[id];
+  saveCart();
+  renderCart();
+}
