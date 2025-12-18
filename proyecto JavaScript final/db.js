@@ -20,3 +20,23 @@ async function fetchProducts() {
     loadCategories();
   } catch (error) {
     console.error('Error al cargar productos', error);
+      }
+}
+
+function renderProducts(list) {
+  productsContainer.innerHTML = '';
+  list.forEach(product => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    card.innerHTML = `
+      <img src="${product.image}">
+      <h3>${product.title}</h3>
+      <p>$${product.price}</p>
+      <small>${product.category}</small>
+      <button onclick="addToCart(${product.id})">Agregar</button>
+    `;
+
+    productsContainer.appendChild(card);
+  });
+}
