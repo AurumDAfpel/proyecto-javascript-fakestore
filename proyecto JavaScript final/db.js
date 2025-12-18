@@ -78,3 +78,17 @@ function renderCart() {
 
   cartTotal.textContent = total.toFixed(2);
 }
+
+function saveCart() {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function loadCategories() {
+  const categories = [...new Set(products.map(p => p.category))];
+  categories.forEach(cat => {
+    const option = document.createElement('option');
+    option.value = cat;
+    option.textContent = cat;
+    categoryFilter.appendChild(option);
+  });
+}
