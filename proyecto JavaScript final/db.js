@@ -92,3 +92,33 @@ function loadCategories() {
     categoryFilter.appendChild(option);
   });
 }
+
+categoryFilter.addEventListener('change', () => {
+  filteredProducts = categoryFilter.value === 'all'
+    ? products
+    : products.filter(p => p.category === categoryFilter.value);
+  renderProducts(filteredProducts);
+});
+
+sortFilter.addEventListener('change', () => {
+  const value = sortFilter.value;
+  let sorted = [...filteredProducts];
+
+  if (value === 'price-asc') sorted.sort((a,b)=>a.price-b.price);
+  if (value === 'price-desc') sorted.sort((a,b)=>b.price-a.price);
+  if (value === 'name-asc') sorted.sort((a,b)=>a.title.localeCompare(b.title));
+  if (value === 'name-desc') sorted.sort((a,b)=>b.title.localeCompare(a.title));
+
+  renderProducts(sorted);
+});
+
+searchInput.addEventListener('input', e => {
+  const text = e.target.value.toLowerCase();
+  const result = products.filter(p =>
+    p.title.toLowerCase().includes(text)
+  );
+  renderProducts(result);
+});
+
+fetchProducts();
+renderCart();
